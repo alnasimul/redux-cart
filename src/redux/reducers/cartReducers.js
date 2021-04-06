@@ -31,7 +31,15 @@ const cartReducers = (state = initialState, action) => {
         case ADD_TO_CART :
 
         const newId = action.id;
-        const newCart = [...state.cart,newId];
+        const newItem = {
+            productId: action.id,
+            name: action.name,
+            cartId: state.cart.length + 1
+        }
+        const newCart = [...state.cart,newItem];
+
+        console.log(action);
+        console.log(newCart)
 
         return {
             ... state,
@@ -39,9 +47,9 @@ const cartReducers = (state = initialState, action) => {
         }
 
         case REMOVE_FROM_CART :
-
-        const id = action.id;
-        const remainingCart = state.cart.filter( item => item !== id);
+        console.log(action);
+        const cartId = action.cartId;
+        const remainingCart = state.cart.filter( item=> item.cartId !== cartId);
 
         return {
             ...state,
